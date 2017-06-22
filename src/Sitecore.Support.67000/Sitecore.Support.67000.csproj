@@ -36,7 +36,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Forms.Core">
-      <HintPath>..\lib\Sitecore.Forms.Core.dll</HintPath>
+      <HintPath>..\..\lib\Sitecore.Forms.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -44,7 +44,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.WFFM.Abstractions">
-      <HintPath>..\lib\Sitecore.WFFM.Abstractions.dll</HintPath>
+      <HintPath>..\..\lib\Sitecore.WFFM.Abstractions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
