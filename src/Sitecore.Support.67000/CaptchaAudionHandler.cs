@@ -5,9 +5,10 @@ using Sitecore.Form.Core.Media;
 using Sitecore.Support._67000;
 using Sitecore.Support.Forms.Core.Data;
 using Sitecore.Web;
-using Sitecore.WFFM.Abstractions.Dependencies;
+using Sitecore.WFFM.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -55,7 +56,7 @@ namespace Sitecore.Support.Form.Core.Web
                 context.Response.StatusCode = 200;
                 using (FileStream fileStream = File.Open(str, FileMode.Open))
                 {
-                    context.Response.AddHeader("Content-Length", fileStream.Length.ToString());
+                    context.Response.AddHeader("Content-Length", fileStream.Length.ToString((IFormatProvider)CultureInfo.InvariantCulture));
                     CaptchaAudionHandler.Transfer.TransmitStream((Stream)fileStream, context.Response, 512);
                 }
                 try
@@ -76,7 +77,7 @@ namespace Sitecore.Support.Form.Core.Web
                 using (BinaryWriter to = new BinaryWriter((Stream)fileStream))
                 {
                     List<string> stringList = new List<string>() { "ding" };
-                    stringList.AddRange(text.ToLower().Select<char, string>((Func<char, string>)(c => "_" + c.ToString())));
+                    stringList.AddRange(text.ToLower().Select<char, string>((Func<char, string>)(c => "_" + (object)c)));
                     using (StreamList streams = this.GetStreams(stringList.ToArray()))
                         Wave.Concat(streams, to);
                 }
@@ -88,14 +89,10 @@ namespace Sitecore.Support.Form.Core.Web
             StreamList streamList = new StreamList();
             if (resIdentifiers != null)
             {
-                for (int index = 0; index < resIdentifiers.Length; ++index)
+                foreach (string resIdentifier in resIdentifiers)
                 {
-                    string str = resIdentifiers[index];
-                    if (!string.IsNullOrEmpty(str))
-                    {
-                        UnmanagedMemoryStream unmanagedMemoryStream = DependenciesManager.ResourceManager.GetObject(str) ?? resource.ResourceManager.GetStream(str);
-                        streamList.Add((Stream)unmanagedMemoryStream);
-                    }
+                    if (!string.IsNullOrEmpty(resIdentifier))
+                        streamList.Add((Stream)DependenciesManager.ResourceManager.GetObject(resIdentifier)?? resource.ResourceManager.GetStream(resIdentifier) );
                 }
             }
             return streamList;
@@ -117,7 +114,7 @@ namespace Sitecore.Support.Form.Core.Web
                 {
                     flag = false;
                     int count = stream.Read(buffer, 0, blockSize);
-                    if ((uint)count > 0U)
+                    if (count != 0)
                     {
                         response.OutputStream.Write(buffer, 0, count);
                         try

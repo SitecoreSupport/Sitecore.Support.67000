@@ -35,12 +35,16 @@
       <HintPath>..\packages\WFFM.MSCaptcha.8.1.3\lib\MSCaptcha.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.Kernel, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SC.Sitecore.Kernel.8.1.3\lib\Sitecore.Kernel.dll</HintPath>
+    <Reference Include="Sitecore.Forms.Core">
+      <HintPath>..\lib\Sitecore.Forms.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sitecore.WFFM.Abstractions, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WFFM.Sitecore.WFFM.Abstractions.8.1.3\lib\Sitecore.WFFM.Abstractions.dll</HintPath>
+    <Reference Include="Sitecore.Kernel, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SC.Sitecore.Kernel.8.1.1\lib\Sitecore.Kernel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.WFFM.Abstractions">
+      <HintPath>..\lib\Sitecore.WFFM.Abstractions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -60,7 +64,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources.cs" />
     <Compile Include="StreamList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wave.cs" />
